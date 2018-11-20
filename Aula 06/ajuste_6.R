@@ -1,5 +1,5 @@
 
-rm(list=ls()); #---- limpa todo o ambiente de variáveis para a execução do R
+rm(list=ls()); #---- limpa todo o ambiente de vari?veis para a execu??o do R
 
 #install.packages("plyr")
 #install.packages("NMF")
@@ -22,9 +22,9 @@ library(car)
 dados3 <- read.csv2("https://raw.githubusercontent.com/Cayan-Portela/ENAP_regressao/master/Aula%2006/censo_2000.csv",
                 header = TRUE)
 
-#---- testando hipóteses para vários parâmetros
+#---- testando hip?teses para v?rios par?metros
 
-mod2.ex <- lm(dados3$mort_infantil ~ dados3$renda_per_capita 
+mod2.ex <- lm(dados3$mort_infantil ~ dados3$renda_per_capita
               + dados3$indice_gini
               + dados3$salario_medio_mensal
               + dados3$perc_criancas_extrem_pobres
@@ -60,17 +60,17 @@ anova(mod2.ex.rest, mod2.ex, test='LRT')
 #1-pf(f_value,5550,4)
 
 
-#---- testando hipóteses para vários parâmetros" LinearHypothesis" do pacote "car"----;
+#---- testando hip?teses para v?rios par?metros" LinearHypothesis" do pacote "car"----;
 linearHypothesis(mod2.ex, c("dados3$indice_gini = 0", 
                             "dados3$salario_medio_mensal = 0", 
                             "dados3$perc_pop_rural=0"))
 
-#---Exercício prático 1
+#---Exerc?cio pr?tico 1
 linearHypothesis(mod2.ex, c("dados3$indice_gini = 0", 
                             "dados3$salario_medio_mensal = 1", 
                             "dados3$perc_criancas_pobres=0"))
 
-#---Termos quadrático e cúbico
+#---Termos quadr?tico e c?bico
 mod1b.ex <- lm(dados3$mort_infantil ~ dados3$renda_per_capita
                + I(renda_per_capita^2)
                + I(renda_per_capita^3)
@@ -96,33 +96,33 @@ summary(mod1b.ex.rest)
 anova(mod1b.ex.rest, mod1b.ex, test='LRT')
 
 
-#---Exercício prático 2
+#---Exerc?cio pr?tico 2
 linearHypothesis(mod2.ex, "dados3$indice_gini + 2*dados3$salario_medio_mensal = 1")
 
 
-#--- distribuição qui-quadrada
+#--- distribui??o qui-quadrada
 
 qchisq(0.90, df = 2)
 qchisq(0.95, df = 5)
 
-qchisq(0.95, df = 7)    #--- valores críticos
+qchisq(0.95, df = 7)    #--- valores cr?ticos
 qchisq(0.95, df = 4)    
 
 1 - pchisq(30, df = 7)  #--- probabilidades da cauda da direita
 1 - pchisq(15, df = 4)
 
-#--- distribuição F
+#--- distribui??o F
 
 qf(0.90, df1 = 2, df2 = 2)
 qf(0.90, df1 = 6, df2 = 10)
 
-qf(0.95, df1 = 7, df2 = 200)    #--- valores críticos
+qf(0.95, df1 = 7, df2 = 200)    #--- valores cr?ticos
 qf(0.95, df1 = 4, df2 = 200)    
 
 1 - pf(30, df1 = 7, df2 = 200)  #--- probabilidades da cauda da direita
 1 - pf(15, df1 = 4, df2 = 200)
 
-#--- convergência da F para uma qui-quadrada
+#--- converg?ncia da F para uma qui-quadrada
 
 qchisq(0.90, df = 4)
 qf(0.90, df1 = 4, df2 = 10)*4
