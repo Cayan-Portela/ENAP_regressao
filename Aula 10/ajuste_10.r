@@ -14,7 +14,7 @@ library(pROC)
 
 ##------Aula 10-------##
 
-rm(list=ls()); #---- limpa todo o ambiente de variáveis
+rm(list=ls()); #---- limpa todo o ambiente de vari?veis
 
 #modelos Lineares Generalizados.
 
@@ -29,13 +29,13 @@ summary(modelo1)
 #odd-ratios---
 OR1=exp(modelo1$coefficients);OR1
 
-#intervalo de confiança---
+#intervalo de confian?a---
 ICbeta1=confint.default(modelo1,level=0.95);ICbeta1
 
-#Intervalo de confiança para odds ratio----
+#Intervalo de confian?a para odds ratio----
 ICOR1=exp(ICbeta1);ICOR1
 
-#razões de change e intervalo de confiança---
+#raz?es de change e intervalo de confian?a---
 
 round((cbind(OR1, ICOR1)),3)
 
@@ -71,11 +71,11 @@ mod4 <- glm(formula = alta_mort_infantil ~ perc_pessoas_dom_agua_estogo_inadequa
             family = binomial(link = "logit"), data = dados3)
 summary(mod4)
 
-plot(dados3$perc_pessoas_dom_agua_estogo_inadequados,mod4$fitted.values, col = "green", xlab="Perc. Água e Esgoto Inadeq.", ylab="Prob. de alta mortalidade")
+plot(dados3$perc_pessoas_dom_agua_estogo_inadequados,mod4$fitted.values, col = "green", xlab="Perc. ?gua e Esgoto Inadeq.", ylab="Prob. de alta mortalidade")
 
 
 
-mod5 <- glm(formula = alta_mort_infantil ~ renda_per_capita 
+mod6 <- glm(formula = alta_mort_infantil ~ renda_per_capita +
                      + indice_gini
                      + salario_medio_mensal
                      + perc_criancas_extrem_pobres
@@ -86,7 +86,7 @@ mod5 <- glm(formula = alta_mort_infantil ~ renda_per_capita
                      + perc_pop_rural
                      + as.factor(Regiao), 
                      family = binomial(link = "logit"), data = dados3)
-summary(mod5)
+summary(mod6)
 
 data.frame(exp(coef(mod5)), exp(confint(mod5)))
 
@@ -98,7 +98,7 @@ summary(mod6)
 
 
 ##-------------------------------------------------------------------------------
-#---- Teste da razão de verossimilhança (LRT), com ANOVA
+#---- Teste da raz?o de verossimilhan?a (LRT), com ANOVA
 #-------------------------------------------------------------------------------
 
 modsimul <- glm(formula = y ~ renda_per_capita + indice_gini + perc_criancas_extrem_pobres
@@ -117,8 +117,8 @@ pvalor <- 1 - pchisq(LRT, df = 2);pvalor
 anova(modsimul.rest, modsimul, test = "LRT")
 
 #-------------------------------------------------------------------------------
-#---- Pseudo R2 em regressão logística
-#---- Função pR2
+#---- Pseudo R2 em regress?o log?stica
+#---- Fun??o pR2
 #---- 
 #---- llh = The log-likelihood from the fitted model
 #---- llhNull = The log-likelihood from the intercept-only restricted model
